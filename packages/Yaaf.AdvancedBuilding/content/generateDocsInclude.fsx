@@ -200,7 +200,9 @@ let buildAllDocumentation outDocDir website_root =
            (binaries, Path.GetFullPath outDir, config.LayoutRoots,
             parameters = projInfo,
             libDirs = [ Path.GetFullPath (libDir) ],
-            otherFlags = [ "-r:System";"-r:System.Core";"-r:System.Xml";"-r:System.Xml.Linq"; sprintf "-r:%s" (Path.GetFullPath( libDir @@ "EntityFramework.dll" )) ],
+            otherFlags = [ "-r:System";"-r:System.Core";"-r:System.Xml";"-r:System.Xml.Linq"
+                           sprintf "-r:%s" (Path.GetFullPath( libDir @@ "EntityFramework.dll" ))
+                           sprintf "-r:%s" (Path.GetFullPath( libDir @@ "EntityFramework.SqlServer.dll" )) ],
             sourceRepo = config.SourceReproUrl,
             sourceFolder = "./",
             publicOnly = true, 
