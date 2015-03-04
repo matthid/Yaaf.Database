@@ -1,0 +1,9 @@
+EntityFramework
+Microsoft.AspNet.Identity.Core
+Microsoft.AspNet.Identity.EntityFramework
+
+FSharp.Core
+Unquote
+Foq
+FsUnit
+NUnit

@@ -1,0 +1,5 @@
+FSharp.Core
+
+EntityFramework
+Microsoft.AspNet.Identity.Core
+Microsoft.AspNet.Identity.EntityFramework
