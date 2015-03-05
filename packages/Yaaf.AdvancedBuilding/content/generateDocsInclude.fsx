@@ -197,12 +197,13 @@ let buildAllDocumentation outDocDir website_root =
             referenceBinaries
             |> List.map (fun lib -> Path.GetFullPath( libDir @@ lib ))
         let entityFramework = Path.GetFullPath( libDir @@ "EntityFramework.dll" )
+        printf "EntityFramework %s exists: %O" entityFramework (File.Exists entityFramework)
         let entityFrameworkSql = Path.GetFullPath( libDir @@ "EntityFramework.SqlServer.dll" )
         MetadataFormat.Generate
            ([entityFramework] @ binaries, Path.GetFullPath outDir, config.LayoutRoots,
             parameters = projInfo,
             //libDirs = [ Path.GetFullPath (libDir) ],
-            //otherFlags = [ "-r:System";"-r:System.Core";"-r:System.Xml";"-r:System.Xml.Linq" ],
+            otherFlags = [ "-r:"+entityFramework; "-r:System";"-r:System.Core";"-r:System.Xml";"-r:System.Xml.Linq" ],
             sourceRepo = config.SourceReproUrl,
             sourceFolder = "./",
             publicOnly = true, 
