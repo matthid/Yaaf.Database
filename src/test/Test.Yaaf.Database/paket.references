@@ -3,6 +3,8 @@ Microsoft.AspNet.Identity.Core
 Microsoft.AspNet.Identity.EntityFramework
 
 FSharp.Core
+Yaaf.FSharp.Helper
+
 Unquote
 Foq
 FsUnit

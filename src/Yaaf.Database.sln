@@ -24,9 +24,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{1572AB1D-0D2
 		..\doc\ReleaseNotes.md = ..\doc\ReleaseNotes.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yaaf.Database", "source\Yaaf.Database\Yaaf.Database.csproj", "{2C40D68F-E104-461C-8ED4-2CE30BF2DFDB}"
-EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Test.Yaaf.Database", "test\Test.Yaaf.Database\Test.Yaaf.Database.fsproj", "{DD82CEC5-4D0F-4A40-A54E-6FDCD79DCBDD}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Yaaf.Database", "source\Yaaf.Database\Yaaf.Database.fsproj", "{2C40D68F-E104-461C-8ED4-2CE30BF2DFDB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,14 +34,14 @@ Global
 		Release|Net45 = Release|Net45
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2C40D68F-E104-461C-8ED4-2CE30BF2DFDB}.Debug|Net45.ActiveCfg = Debug|Net45
-		{2C40D68F-E104-461C-8ED4-2CE30BF2DFDB}.Debug|Net45.Build.0 = Debug|Net45
-		{2C40D68F-E104-461C-8ED4-2CE30BF2DFDB}.Release|Net45.ActiveCfg = Release|Net45
-		{2C40D68F-E104-461C-8ED4-2CE30BF2DFDB}.Release|Net45.Build.0 = Release|Net45
 		{DD82CEC5-4D0F-4A40-A54E-6FDCD79DCBDD}.Debug|Net45.ActiveCfg = Debug|Net45
 		{DD82CEC5-4D0F-4A40-A54E-6FDCD79DCBDD}.Debug|Net45.Build.0 = Debug|Net45
 		{DD82CEC5-4D0F-4A40-A54E-6FDCD79DCBDD}.Release|Net45.ActiveCfg = Release|Net45
 		{DD82CEC5-4D0F-4A40-A54E-6FDCD79DCBDD}.Release|Net45.Build.0 = Release|Net45
+		{2C40D68F-E104-461C-8ED4-2CE30BF2DFDB}.Debug|Net45.ActiveCfg = Debug|Net45
+		{2C40D68F-E104-461C-8ED4-2CE30BF2DFDB}.Debug|Net45.Build.0 = Debug|Net45
+		{2C40D68F-E104-461C-8ED4-2CE30BF2DFDB}.Release|Net45.ActiveCfg = Release|Net45
+		{2C40D68F-E104-461C-8ED4-2CE30BF2DFDB}.Release|Net45.Build.0 = Release|Net45
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

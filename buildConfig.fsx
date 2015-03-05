@@ -64,7 +64,7 @@ let buildConfig =
           Attribute.FileVersion config.Version
           Attribute.InformationalVersion config.Version]
       CreateFSharpAssemblyInfo "./src/SolutionInfo.fs" info
-      CreateCSharpAssemblyInfo "./src/SolutionInfo.cs" info
+      //CreateCSharpAssemblyInfo "./src/SolutionInfo.cs" info
       )
     EnableProjectFileCreation = false
     //GeneratedFileList =

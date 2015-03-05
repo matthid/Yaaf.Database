@@ -9,6 +9,7 @@ nuget FSharp.Formatting == 2.6.3
 
 // Project
 nuget FSharp.Core copy_local: false
+nuget Yaaf.FSharp.Helper 
 nuget EntityFramework == 6.1.2
 nuget Microsoft.AspNet.Identity.Core == 1.0.0
 nuget Microsoft.AspNet.Identity.EntityFramework == 1.0.0
