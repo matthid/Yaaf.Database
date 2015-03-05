@@ -199,7 +199,7 @@ let buildAllDocumentation outDocDir website_root =
         let entityFramework = Path.GetFullPath( libDir @@ "EntityFramework.dll" )
         let entityFrameworkSql = Path.GetFullPath( libDir @@ "EntityFramework.SqlServer.dll" )
         MetadataFormat.Generate
-           (binaries @ [entityFramework], Path.GetFullPath outDir, config.LayoutRoots,
+           ([entityFramework] @ binaries, Path.GetFullPath outDir, config.LayoutRoots,
             parameters = projInfo,
             libDirs = [ Path.GetFullPath (libDir) ],
             otherFlags = [ "-r:System";"-r:System.Core";"-r:System.Xml";"-r:System.Xml.Linq" ],
