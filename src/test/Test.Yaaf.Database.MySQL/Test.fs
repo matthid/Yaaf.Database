@@ -14,15 +14,13 @@ open MySql.Data.Entity
 
 [<DbConfigurationType(typeof<MySqlEFConfiguration>)>]
 type MySQLTestDbContext () as x =
-  inherit AbstractTestDbContext(MySQLTestDbContext.ConnectionName, false)
-  do x.DoInit()
-  
-  override x.Init() =
+  inherit AbstractTestDbContext(MySQLTestDbContext.ConnectionName)
+
+  do
     DbConfiguration.SetConfiguration (new MySqlEFConfiguration ());
     System.Data.Entity.Database.SetInitializer(new NUnitInitializer<MySQLTestDbContext>())
-    //System.Data.Entity.Database.SetInitializer(
-    //  new MigrateDatabaseToLatestVersion<MySQLTestDbContext, MySQLConfiguration<MySQLTestDbContext>>())
- 
+    x.Database.Initialize(false)
+
   static member ConnectionName
     with get () =  
       let env = System.Environment.GetEnvironmentVariable ("connection_mysql")

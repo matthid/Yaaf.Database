@@ -8,6 +8,7 @@ open Microsoft.AspNet.Identity.EntityFramework
 open System
 open System.Collections.Generic
 open System.Data.Entity
+open System.Data.Entity.Migrations
 open System.Data.Entity.Core.Objects
 open System.Data.Entity.Infrastructure
 open System.Linq
@@ -16,27 +17,29 @@ open System.Threading
 open System.Threading.Tasks
 open Yaaf.Helper
 
-type AbstractApplicationDbContext(nameOrConnectionString, ?doInit) as x =
+type IUpgradeDatabaseProvider =
+    abstract GetMigrator : unit -> DbMigrator
+
+[<AbstractClass>]
+type AbstractApplicationDbContext(nameOrConnectionString) =
     inherit DbContext(nameOrConnectionString : string)
-    let doInit = defaultArg doInit true
-           
     static do
         if (String.IsNullOrWhiteSpace (AppDomain.CurrentDomain.GetData ("DataDirectory") :?> string)) then
             System.AppDomain.CurrentDomain.SetData (
                 "DataDirectory",
                 System.AppDomain.CurrentDomain.BaseDirectory)
-    do if doInit then x.DoInit()
+    interface IUpgradeDatabaseProvider with
+      member x.GetMigrator() = x.GetMigrator()
 
+    abstract GetMigrator : unit -> DbMigrator
+    default x.GetMigrator () =
+        AbstractApplicationDbContext.MigratorNotImplemented()
 
-    abstract Init : unit -> unit
-    default x.Init () = ()
-    
-    member x.DoInit () =
-        x.Init ()
-        x.Database.Initialize (false)
-        
     member x.MySaveChanges () =
         AbstractApplicationDbContext.MySaveChanges (x)    
+ 
+    static member internal MigratorNotImplemented() =
+        raise <| System.NotSupportedException("Migration is not supported by this type, please implement GetMigrator.")
 
     static member MySaveChanges (context: DbContext) =
       async {
