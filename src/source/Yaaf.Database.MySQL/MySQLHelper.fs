@@ -18,6 +18,6 @@ type MySQLConfiguration<'T when 'T :> DbContext>() as x =
     x.CodeGenerator <- new MySql.Data.Entity.MySqlMigrationCodeGenerator()
     x.SetSqlGenerator("MySql.Data.MySqlClient", new MySql.Data.Entity.MySqlMigrationSqlGenerator())
     x.SetHistoryContextFactory("MySql.Data.MySqlClient", fun conn schema -> new MySqlHistoryContext(conn, schema) :> _)
-    x.AutomaticMigrationsEnabled <- true
+    x.AutomaticMigrationsEnabled <- false
   
   override x.Seed(context) = ()

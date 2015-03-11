@@ -30,6 +30,17 @@ open AssemblyInfoFile
 if isMono then
     monoArguments <- "--runtime=v4.0 --debug"
 
+let efDeps =
+ [ "EntityFramework"
+   "Microsoft.AspNet.Identity.Core"
+   "Microsoft.AspNet.Identity.EntityFramework" ]
+   |> List.map (fun name -> name, (GetPackageVersion "packages" name) |> RequireExactly)
+
+let mysqlDeps =
+ [ "MySql.Data"
+   "MySQL.Data.Entities" ]
+   |> List.map (fun name -> name, (GetPackageVersion "packages" name) |> RequireExactly) 
+
 let buildConfig =
  // Read release notes document
  let release = ReleaseNotesHelper.parseReleaseNotes (File.ReadLines "doc/ReleaseNotes.md")
@@ -49,11 +60,9 @@ let buildConfig =
               Version = config.Version
               ReleaseNotes = toLines release.Notes
               Dependencies = 
-                [ "EntityFramework"
-                  "Microsoft.AspNet.Identity.Core"
-                  "Microsoft.AspNet.Identity.EntityFramework"
-                  "FSharp.Core" ]
-                  |> List.map (fun name -> name, (GetPackageVersion "packages" name)) })
+                [ "FSharp.Core" ]
+                  |> List.map (fun name -> name, (GetPackageVersion "packages" name))
+                  |> List.append efDeps })
         "Yaaf.Database.MySQL.nuspec", (fun config p ->
           { p with
               Version = config.Version
@@ -62,13 +71,10 @@ let buildConfig =
               Summary = "MySQL helpers in addition to Yaaf.Database."
               Description = "MySQL helpers in addition to Yaaf.Database."
               Dependencies = 
-                [ "EntityFramework"
-                  "Microsoft.AspNet.Identity.Core"
-                  "Microsoft.AspNet.Identity.EntityFramework"
-                  "MySql.Data"
-                  "MySQL.Data.Entities"
-                  "FSharp.Core" ]
+                ["FSharp.Core" ]
                   |> List.map (fun name -> name, (GetPackageVersion "packages" name))
+                  |> List.append efDeps
+                  |> List.append mysqlDeps
                   |> List.append [ config.ProjectName, config.Version ] }) ]
     UseNuget = false
     SetAssemblyFileVersions = (fun config ->
