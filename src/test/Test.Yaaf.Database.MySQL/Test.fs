@@ -11,6 +11,7 @@ open Yaaf.Database.MySQL
 open System.Data.Entity
 open MySql.Data.Entity
 
+[<DbConfigurationType(typeof<MySqlEFConfiguration>)>]
 type MySQLTestDbContext () as x =
   inherit AbstractTestDbContext(MySQLTestDbContext.ConnectionName, false)
   do x.DoInit()
