@@ -43,6 +43,10 @@
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\SolutionInfo.fs">
+      <Link>SolutionInfo.fs</Link>
+    </Compile>
+    <Compile Include="AssemblyInfo.fs" />
     <Compile Include="MySQLHelper.fs" />
     <None Include="Script.fsx" />
     <None Include="paket.references" />

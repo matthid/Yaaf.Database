@@ -16,14 +16,16 @@ open System.Threading
 open System.Threading.Tasks
 open Yaaf.Helper
 
-type AbstractApplicationDbContext(nameOrConnectionString) as x =
+type AbstractApplicationDbContext(nameOrConnectionString, ?doInit) as x =
     inherit DbContext(nameOrConnectionString : string)
+    let doInit = defaultArg doInit true
            
     static do
         if (String.IsNullOrWhiteSpace (AppDomain.CurrentDomain.GetData ("DataDirectory") :?> string)) then
             System.AppDomain.CurrentDomain.SetData (
                 "DataDirectory",
                 System.AppDomain.CurrentDomain.BaseDirectory)
+    do if doInit then x.DoInit()
 
 
     abstract Init : unit -> unit
