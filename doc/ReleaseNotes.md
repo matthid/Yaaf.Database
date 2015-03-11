@@ -1,4 +1,8 @@
-﻿### 0.0.3
+﻿### 0.0.4
+
+ * Pin versions && disable automatic migrations.
+
+### 0.0.3
 
  * Fix api breakage of MySaveChanges.
 
