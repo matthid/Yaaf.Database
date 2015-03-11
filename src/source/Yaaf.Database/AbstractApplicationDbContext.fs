@@ -75,4 +75,4 @@ type AbstractApplicationDbContext(nameOrConnectionString, ?doInit) as x =
                     | _ ->
                         //For good luck
                         do! entry.ReloadAsync () |> Task.awaitPlain
-      }
+      } |> Async.StartAsTaskImmediate
