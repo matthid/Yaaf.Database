@@ -62,7 +62,7 @@ type RawSQLTests () =
       (
         use c = x.CreateContext()
         c.Users.Add(new MyUser(UserName = "testuser", Version = 3)) |> ignore
-        c.MySaveChanges() |> Async.RunSynchronously
+        c.MySaveChanges().Wait()
       )
       
       (

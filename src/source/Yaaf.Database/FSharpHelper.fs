@@ -10,8 +10,13 @@ open System.Collections.Generic
 open System.Linq
 open System.Text
 open System.Threading.Tasks
+open Yaaf.Helper
 
 type FSharpHelper () =
+    static member StartAsync(asy) = asy |> Async.StartAsTaskImmediate
+    static member StartAsync(asy, creationOpts) = Async.StartAsTaskImmediate(asy, creationOpts)
+    static member StartAsync(asy, cancel) = Async.StartAsTaskImmediate(asy, cancellationToken = cancel)
+    static member StartAsync(asy, creationOpts, cancel) = Async.StartAsTaskImmediate(asy, creationOpts, cancel)
 
     static member ToFSharpS<'T when 'T : (new : unit -> 'T) and 'T : struct and 'T :> ValueType> ( data:Nullable<'T>) =
         if (data.HasValue) then
