@@ -1,3 +1,10 @@
+services:
+  - mysql
+  - mssql2014
+  - mssql2014rs
+environment:
+  connection_mssql: "Data Source=(local)\\SQL2014;Database=nunit_db;User ID=sa;Password=Password12!"
+  connection_mysql: "Server=localhost;Database=nunit_db;Uid=root;Pwd=Password12!"
 init:
   - git config --global core.autocrlf input
 build_script:

@@ -25,19 +25,20 @@ type MyCreateDatabaseIfNotExists<'TContext when 'TContext :> DbContext > (seedMe
         seedMethod(context)
 
 type NUnitInitializer<'TContext when 'TContext :> DbContext > () as x =
-    inherit CreateDatabaseIfNotExists<'TContext>()
-    
-    let changer = new MyDropCreateDatabaseIfModelChanges<'TContext> (x.MySeed);
-    let creator = new MyCreateDatabaseIfNotExists<'TContext> (x.MySeed);
+    let changer = new MyDropCreateDatabaseIfModelChanges<'TContext> (x.Seed);
+    let creator = new MyCreateDatabaseIfNotExists<'TContext> (x.Seed);
 
-    member x.MySeed c = x.Seed c
-
+    abstract Seed : 'TContext -> unit
     default x.Seed (context:'TContext) = ()
-    
-    override x.InitializeDatabase (context:'TContext) =
+
+    abstract InitializeDatabase : 'TContext -> unit
+    default x.InitializeDatabase (context:'TContext) =
         try
             changer.InitializeDatabase (context);
         with
         | :? NotSupportedException ->
             // Database not existent
             creator.InitializeDatabase (context)
+
+    interface IDatabaseInitializer<'TContext> with
+      member x.InitializeDatabase c = x.InitializeDatabase c

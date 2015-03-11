@@ -25,14 +25,11 @@ type AbstractApplicationDbContext(nameOrConnectionString) as x =
                 "DataDirectory",
                 System.AppDomain.CurrentDomain.BaseDirectory)
 
-    do
-        x.MyInit()
-
 
     abstract Init : unit -> unit
     default x.Init () = ()
     
-    member private x.MyInit () =
+    member x.DoInit () =
         x.Init ()
         x.Database.Initialize (false)
         

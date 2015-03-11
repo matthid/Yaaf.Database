@@ -10,9 +10,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{63297B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "project", "project", "{BF60BC93-E09B-4E5F-9D85-95A519479D54}"
 	ProjectSection(SolutionItems) = preProject
+		..\.travis.yml = ..\.travis.yml
+		..\appveyor.yml = ..\appveyor.yml
 		..\buildConfig.fsx = ..\buildConfig.fsx
 		..\CONTRIBUTING.md = ..\CONTRIBUTING.md
 		..\README.md = ..\README.md
+		..\nuget\Yaaf.Database.MySQL.nuspec = ..\nuget\Yaaf.Database.MySQL.nuspec
 		..\nuget\Yaaf.Database.nuspec = ..\nuget\Yaaf.Database.nuspec
 	EndProjectSection
 EndProject
@@ -28,25 +31,66 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Test.Yaaf.Database", "test\
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Yaaf.Database", "source\Yaaf.Database\Yaaf.Database.fsproj", "{2C40D68F-E104-461C-8ED4-2CE30BF2DFDB}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Yaaf.Database.MySQL", "source\Yaaf.Database.MySQL\Yaaf.Database.MySQL.fsproj", "{B481A01E-7D89-487E-9BE8-5D4EB056562A}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Test.Yaaf.Database.MySQL", "test\Test.Yaaf.Database.MySQL\Test.Yaaf.Database.MySQL.fsproj", "{910B3E5C-6BD7-468B-BE77-617B2F8292F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|Net45 = Debug|Net45
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|Net45 = Release|Net45
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DD82CEC5-4D0F-4A40-A54E-6FDCD79DCBDD}.Debug|Any CPU.ActiveCfg = Debug|Net45
+		{DD82CEC5-4D0F-4A40-A54E-6FDCD79DCBDD}.Debug|Mixed Platforms.ActiveCfg = Debug|Net45
+		{DD82CEC5-4D0F-4A40-A54E-6FDCD79DCBDD}.Debug|Mixed Platforms.Build.0 = Debug|Net45
 		{DD82CEC5-4D0F-4A40-A54E-6FDCD79DCBDD}.Debug|Net45.ActiveCfg = Debug|Net45
 		{DD82CEC5-4D0F-4A40-A54E-6FDCD79DCBDD}.Debug|Net45.Build.0 = Debug|Net45
+		{DD82CEC5-4D0F-4A40-A54E-6FDCD79DCBDD}.Release|Any CPU.ActiveCfg = Release|Net45
+		{DD82CEC5-4D0F-4A40-A54E-6FDCD79DCBDD}.Release|Mixed Platforms.ActiveCfg = Release|Net45
+		{DD82CEC5-4D0F-4A40-A54E-6FDCD79DCBDD}.Release|Mixed Platforms.Build.0 = Release|Net45
 		{DD82CEC5-4D0F-4A40-A54E-6FDCD79DCBDD}.Release|Net45.ActiveCfg = Release|Net45
 		{DD82CEC5-4D0F-4A40-A54E-6FDCD79DCBDD}.Release|Net45.Build.0 = Release|Net45
+		{2C40D68F-E104-461C-8ED4-2CE30BF2DFDB}.Debug|Any CPU.ActiveCfg = Debug|Net45
+		{2C40D68F-E104-461C-8ED4-2CE30BF2DFDB}.Debug|Mixed Platforms.ActiveCfg = Debug|Net45
+		{2C40D68F-E104-461C-8ED4-2CE30BF2DFDB}.Debug|Mixed Platforms.Build.0 = Debug|Net45
 		{2C40D68F-E104-461C-8ED4-2CE30BF2DFDB}.Debug|Net45.ActiveCfg = Debug|Net45
 		{2C40D68F-E104-461C-8ED4-2CE30BF2DFDB}.Debug|Net45.Build.0 = Debug|Net45
+		{2C40D68F-E104-461C-8ED4-2CE30BF2DFDB}.Release|Any CPU.ActiveCfg = Release|Net45
+		{2C40D68F-E104-461C-8ED4-2CE30BF2DFDB}.Release|Mixed Platforms.ActiveCfg = Release|Net45
+		{2C40D68F-E104-461C-8ED4-2CE30BF2DFDB}.Release|Mixed Platforms.Build.0 = Release|Net45
 		{2C40D68F-E104-461C-8ED4-2CE30BF2DFDB}.Release|Net45.ActiveCfg = Release|Net45
 		{2C40D68F-E104-461C-8ED4-2CE30BF2DFDB}.Release|Net45.Build.0 = Release|Net45
+		{B481A01E-7D89-487E-9BE8-5D4EB056562A}.Debug|Any CPU.ActiveCfg = Debug|Net45
+		{B481A01E-7D89-487E-9BE8-5D4EB056562A}.Debug|Mixed Platforms.ActiveCfg = Debug|Net45
+		{B481A01E-7D89-487E-9BE8-5D4EB056562A}.Debug|Mixed Platforms.Build.0 = Debug|Net45
+		{B481A01E-7D89-487E-9BE8-5D4EB056562A}.Debug|Net45.ActiveCfg = Debug|Net45
+		{B481A01E-7D89-487E-9BE8-5D4EB056562A}.Debug|Net45.Build.0 = Debug|Net45
+		{B481A01E-7D89-487E-9BE8-5D4EB056562A}.Release|Any CPU.ActiveCfg = Release|Net45
+		{B481A01E-7D89-487E-9BE8-5D4EB056562A}.Release|Mixed Platforms.ActiveCfg = Release|Net45
+		{B481A01E-7D89-487E-9BE8-5D4EB056562A}.Release|Mixed Platforms.Build.0 = Release|Net45
+		{B481A01E-7D89-487E-9BE8-5D4EB056562A}.Release|Net45.ActiveCfg = Release|Net45
+		{B481A01E-7D89-487E-9BE8-5D4EB056562A}.Release|Net45.Build.0 = Release|Net45
+		{910B3E5C-6BD7-468B-BE77-617B2F8292F8}.Debug|Any CPU.ActiveCfg = Debug|Net45
+		{910B3E5C-6BD7-468B-BE77-617B2F8292F8}.Debug|Mixed Platforms.ActiveCfg = Debug|Net45
+		{910B3E5C-6BD7-468B-BE77-617B2F8292F8}.Debug|Mixed Platforms.Build.0 = Debug|Net45
+		{910B3E5C-6BD7-468B-BE77-617B2F8292F8}.Debug|Net45.ActiveCfg = Debug|Net45
+		{910B3E5C-6BD7-468B-BE77-617B2F8292F8}.Debug|Net45.Build.0 = Debug|Net45
+		{910B3E5C-6BD7-468B-BE77-617B2F8292F8}.Release|Any CPU.ActiveCfg = Release|Net45
+		{910B3E5C-6BD7-468B-BE77-617B2F8292F8}.Release|Mixed Platforms.ActiveCfg = Release|Net45
+		{910B3E5C-6BD7-468B-BE77-617B2F8292F8}.Release|Mixed Platforms.Build.0 = Release|Net45
+		{910B3E5C-6BD7-468B-BE77-617B2F8292F8}.Release|Net45.ActiveCfg = Release|Net45
+		{910B3E5C-6BD7-468B-BE77-617B2F8292F8}.Release|Net45.Build.0 = Release|Net45
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{DD82CEC5-4D0F-4A40-A54E-6FDCD79DCBDD} = {ED8079DD-2B06-4030-9F0F-DC548F98E1C4}
+		{910B3E5C-6BD7-468B-BE77-617B2F8292F8} = {ED8079DD-2B06-4030-9F0F-DC548F98E1C4}
 	EndGlobalSection
 EndGlobal

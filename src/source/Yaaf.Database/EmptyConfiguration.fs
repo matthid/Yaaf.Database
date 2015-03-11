@@ -15,3 +15,12 @@ type EmptyConfiguration() =
     do
         ()
         //SetDefaultConnectionFactory (new LocalDbConnectionFactory ("v11.0"));
+
+
+type MSSQLConfiguration<'T when 'T :> DbContext>() as x =
+  inherit System.Data.Entity.Migrations.DbMigrationsConfiguration<'T>()
+
+  do
+    x.AutomaticMigrationsEnabled <- true
+
+  override x.Seed(context) = ()

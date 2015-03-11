@@ -16,23 +16,22 @@ open System.Threading
 open System.Threading.Tasks
 open Yaaf.Helper
 
-type AbstractApplicationIdentityDbContext<'TUser when 'TUser :> IdentityUser >(nameOrConnectionString) as x =
+type AbstractApplicationIdentityDbContext<'TUser when 'TUser :> IdentityUser >(nameOrConnectionString, ?doInit) as x =
     inherit IdentityDbContext<'TUser>(nameOrConnectionString : string)
+    let doInit = defaultArg doInit true
            
     static do
         if (String.IsNullOrWhiteSpace (AppDomain.CurrentDomain.GetData ("DataDirectory") :?> string)) then
             System.AppDomain.CurrentDomain.SetData (
                 "DataDirectory",
                 System.AppDomain.CurrentDomain.BaseDirectory)
-
-    do
-        x.MyInit()
+    do if doInit then x.DoInit()
 
 
     abstract Init : unit -> unit
     default x.Init () = ()
     
-    member private x.MyInit () =
+    member x.DoInit () =
         x.Init ()
         x.Database.Initialize (false)
         
