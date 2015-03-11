@@ -1,4 +1,8 @@
-﻿### 0.0.2
+﻿### 0.0.3
+
+ * Fix api breakage of MySaveChanges.
+
+### 0.0.2
 
  * Added MySQL base Configuration (works with EF 6.0 and MySQL 6.8.3).
  * Change init code (add contructor parameter).
