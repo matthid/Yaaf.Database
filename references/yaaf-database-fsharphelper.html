@@ -44,6 +44,32 @@
 </div>
 <div class="xmldoc">
 </div>
+  <h3>Constructors</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Constructor</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '11', 11)" onmouseover="showTip(event, '11', 11)">
+            new()
+          </code>
+          <div class="tip" id="11">
+            <strong>Signature:</strong> unit -&gt; FSharpHelper<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/matthid//blob/master/src/source/Yaaf.Database/FSharpHelper.fs#L14-14" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+    </tbody>
+  </table>
   <h3>Static members</h3>
   <table class="table table-bordered member-list">
     <thead>
@@ -53,56 +79,18 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '9', 9)" onmouseover="showTip(event, '9', 9)">
-            FromFSharp(data)
-          </code>
-          <div class="tip" id="9">
-            <strong>Signature:</strong> data:Option&lt;&#39;T&gt; -&gt; &#39;T<br />
-                          <strong>Type parameters:</strong> 'T          </div>
-        </td>
-        <td class="xmldoc">
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '10', 10)" onmouseover="showTip(event, '10', 10)">
+          <code onmouseout="hideTip(event, '12', 12)" onmouseover="showTip(event, '12', 12)">
             FromFSharp(data, def)
           </code>
-          <div class="tip" id="10">
-            <strong>Signature:</strong> (data:Option&lt;&#39;T&gt; * def:&#39;T) -&gt; &#39;T<br />
-                          <strong>Type parameters:</strong> 'T          </div>
-        </td>
-        <td class="xmldoc">
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '11', 11)" onmouseover="showTip(event, '11', 11)">
-            FromFSharpS(data)
-          </code>
-          <div class="tip" id="11">
-            <strong>Signature:</strong> data:Option&lt;&#39;T&gt; -&gt; Nullable&lt;&#39;T&gt;<br />
-                          <strong>Type parameters:</strong> 'T          </div>
-        </td>
-        <td class="xmldoc">
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '12', 12)" onmouseover="showTip(event, '12', 12)">
-            ToFSharp(data)
-          </code>
           <div class="tip" id="12">
-            <strong>Signature:</strong> data:&#39;T -&gt; Option&lt;&#39;T&gt;<br />
+            <strong>Signature:</strong> (data:&#39;T option * def:&#39;T) -&gt; &#39;T<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
         <td class="xmldoc">
+            <a href="https://github.com/matthid//blob/master/src/source/Yaaf.Database/FSharpHelper.fs#L36-36" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
           
         </td>
       </tr>
@@ -110,13 +98,71 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '13', 13)" onmouseover="showTip(event, '13', 13)">
-            ToFSharpS(data)
+            FromFSharp(data)
           </code>
           <div class="tip" id="13">
-            <strong>Signature:</strong> data:Nullable&lt;&#39;T&gt; -&gt; Option&lt;&#39;T&gt;<br />
+            <strong>Signature:</strong> (data:&#39;T option) -&gt; &#39;T<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
         <td class="xmldoc">
+            <a href="https://github.com/matthid//blob/master/src/source/Yaaf.Database/FSharpHelper.fs#L33-33" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '14', 14)" onmouseover="showTip(event, '14', 14)">
+            FromFSharpS(data)
+          </code>
+          <div class="tip" id="14">
+            <strong>Signature:</strong> (data:&#39;T option) -&gt; Nullable&lt;&#39;T&gt;<br />
+                          <strong>Type parameters:</strong> 'T          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/matthid//blob/master/src/source/Yaaf.Database/FSharpHelper.fs#L28-28" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '15', 15)" onmouseover="showTip(event, '15', 15)">
+            ToFSharp(data)
+          </code>
+          <div class="tip" id="15">
+            <strong>Signature:</strong> data:&#39;T -&gt; &#39;T option<br />
+                          <strong>Type parameters:</strong> 'T          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/matthid//blob/master/src/source/Yaaf.Database/FSharpHelper.fs#L22-22" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '16', 16)" onmouseover="showTip(event, '16', 16)">
+            ToFSharpS(data)
+          </code>
+          <div class="tip" id="16">
+            <strong>Signature:</strong> data:Nullable&lt;&#39;T&gt; -&gt; &#39;T option<br />
+                          <strong>Type parameters:</strong> 'T          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/matthid//blob/master/src/source/Yaaf.Database/FSharpHelper.fs#L16-16" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
           
         </td>
       </tr>

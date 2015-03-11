@@ -54,27 +54,17 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '1', 1)" onmouseover="showTip(event, '1', 1)">
-            new()
+            new(nameOrConnectionString, doInit)
           </code>
           <div class="tip" id="1">
-            <strong>Signature:</strong> unit -&gt; unit<br />
+            <strong>Signature:</strong> (nameOrConnectionString:string * doInit:bool option) -&gt; AbstractApplicationDbContext<br />
                       </div>
         </td>
         <td class="xmldoc">
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '2', 2)" onmouseover="showTip(event, '2', 2)">
-            new(nameOrConnection)
-          </code>
-          <div class="tip" id="2">
-            <strong>Signature:</strong> nameOrConnection:string -&gt; unit<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
+            <a href="https://github.com/matthid//blob/master/src/source/Yaaf.Database/AbstractApplicationDbContext.fs#L19-19" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
           
         </td>
       </tr>
@@ -89,14 +79,55 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '3', 3)" onmouseover="showTip(event, '3', 3)">
-            MySaveChanges()
+          <code onmouseout="hideTip(event, '2', 2)" onmouseover="showTip(event, '2', 2)">
+            DoInit()
           </code>
-          <div class="tip" id="3">
-            <strong>Signature:</strong> unit -&gt; Task<br />
+          <div class="tip" id="2">
+            <strong>Signature:</strong> unit -&gt; unit<br />
                       </div>
         </td>
         <td class="xmldoc">
+            <a href="https://github.com/matthid//blob/master/src/source/Yaaf.Database/AbstractApplicationDbContext.fs#L34-34" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '3', 3)" onmouseover="showTip(event, '3', 3)">
+            Init()
+          </code>
+          <div class="tip" id="3">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+              <strong>Modifiers:</strong> abstract<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/matthid//blob/master/src/source/Yaaf.Database/AbstractApplicationDbContext.fs#L31-31" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '4', 4)" onmouseover="showTip(event, '4', 4)">
+            MySaveChanges()
+          </code>
+          <div class="tip" id="4">
+            <strong>Signature:</strong> unit -&gt; Async&lt;unit&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/matthid//blob/master/src/source/Yaaf.Database/AbstractApplicationDbContext.fs#L38-38" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
           
         </td>
       </tr>
@@ -111,14 +142,18 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '4', 4)" onmouseover="showTip(event, '4', 4)">
+          <code onmouseout="hideTip(event, '5', 5)" onmouseover="showTip(event, '5', 5)">
             MySaveChanges(context)
           </code>
-          <div class="tip" id="4">
-            <strong>Signature:</strong> context:DbContext -&gt; Task<br />
+          <div class="tip" id="5">
+            <strong>Signature:</strong> context:DbContext -&gt; Async&lt;unit&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
+            <a href="https://github.com/matthid//blob/master/src/source/Yaaf.Database/AbstractApplicationDbContext.fs#L41-41" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
           
         </td>
       </tr>
