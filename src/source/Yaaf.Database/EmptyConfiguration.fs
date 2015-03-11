@@ -12,15 +12,12 @@ open System.Threading.Tasks
 
 type EmptyConfiguration() =
     inherit DbConfiguration()
-    do
-        ()
-        //SetDefaultConnectionFactory (new LocalDbConnectionFactory ("v11.0"));
-
+    do ()
 
 type MSSQLConfiguration<'T when 'T :> DbContext>() as x =
   inherit System.Data.Entity.Migrations.DbMigrationsConfiguration<'T>()
 
   do
-    x.AutomaticMigrationsEnabled <- true
+    x.AutomaticMigrationsEnabled <- false
 
   override x.Seed(context) = ()
