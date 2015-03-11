@@ -27,9 +27,10 @@ type MSSQLTestDbContext () as x =
   inherit AbstractTestDbContext(MSSQLTestDbContext.ConnectionName, false)
   do x.DoInit()
 
-  override x.Init() = 
-    System.Data.Entity.Database.SetInitializer(
-      new MigrateDatabaseToLatestVersion<MSSQLTestDbContext, MSSQLConfiguration<MSSQLTestDbContext>>())
+  override x.Init() =
+    System.Data.Entity.Database.SetInitializer(new NUnitInitializer<MSSQLTestDbContext>())
+  //  System.Data.Entity.Database.SetInitializer(
+  //    new MigrateDatabaseToLatestVersion<MSSQLTestDbContext, MSSQLConfiguration<MSSQLTestDbContext>>())
  
   static member ConnectionName
     with get () =  
