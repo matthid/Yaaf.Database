@@ -9,6 +9,7 @@ open System
 open System.Collections.Generic
 open System.Data.Entity
 open System.Data.Entity.Migrations
+open System.Data.Entity.Migrations.Infrastructure
 open System.Data.Entity.Core.Objects
 open System.Data.Entity.Infrastructure
 open System.Linq
@@ -17,8 +18,49 @@ open System.Threading
 open System.Threading.Tasks
 open Yaaf.Helper
 
+/// This error indicates that the sending pipeline was already closed, so sending is not longer possible (IE the closing element </stream> was already sent!)
+[<System.Serializable>]
+type DatabaseUpgradeException =     
+    inherit System.Exception
+    val mutable private scriptErr :exn
+    val mutable private upgradeScript :string
+    new (msg : string) = { 
+      inherit System.Exception(msg); scriptErr = null; upgradeScript = null }
+    new (msg:string, inner:System.Exception) = { 
+      inherit System.Exception(msg, inner); scriptErr = null; upgradeScript = null }
+    new (info:System.Runtime.Serialization.SerializationInfo, context:System.Runtime.Serialization.StreamingContext) = {
+        inherit System.Exception(info, context); scriptErr = null; upgradeScript = null
+    }
+    member x.ScriptGenerationException with get () = x.scriptErr and set v = x.scriptErr <- v
+    member x.UpgradeScript with get () = x.upgradeScript and set v = x.upgradeScript <- v
+
+
 type IUpgradeDatabaseProvider =
     abstract GetMigrator : unit -> DbMigrator
+    abstract DoUpgrade : unit -> unit
+    abstract FixScript : string -> string
+
+module DatabaseUpgrade =
+  let internal notImpl () =
+        (raise <| System.NotSupportedException("Migration is not supported by this type, please implement GetMigrator."))
+        : 'a
+  
+  
+  let upgrade (provider:IUpgradeDatabaseProvider) =
+    let migrator =
+      try provider.GetMigrator()
+      with e -> raise <| new DatabaseUpgradeException(sprintf "Failed to ugprade database: %s" e.Message, e)
+    try
+      migrator.Update()
+    with exn ->
+      let f = new DatabaseUpgradeException(sprintf "Failed to ugprade database: %s" exn.Message, exn)
+      try
+        let scriptor = new MigratorScriptingDecorator(migrator)
+        let script = scriptor.ScriptUpdate(sourceMigration = null, targetMigration = null)
+        f.UpgradeScript <- provider.FixScript script
+      with scriptErr ->
+        f.ScriptGenerationException <- scriptErr
+      raise f
 
 [<AbstractClass>]
 type AbstractApplicationDbContext(nameOrConnectionString) =
@@ -30,17 +72,21 @@ type AbstractApplicationDbContext(nameOrConnectionString) =
                 System.AppDomain.CurrentDomain.BaseDirectory)
     interface IUpgradeDatabaseProvider with
       member x.GetMigrator() = x.GetMigrator()
-
+      member x.DoUpgrade () = 
+        try x.DoUpgrade() with e -> raise <| DatabaseUpgradeException(e.Message, e)
+      member x.FixScript s = x.FixScript s
+      
+    abstract FixScript : string -> string
+    default x.FixScript s = s
+    
     abstract GetMigrator : unit -> DbMigrator
-    default x.GetMigrator () =
-        AbstractApplicationDbContext.MigratorNotImplemented()
+    default x.GetMigrator () = DatabaseUpgrade.notImpl ()
+
+    abstract DoUpgrade : unit -> unit 
+    default x.DoUpgrade() = DatabaseUpgrade.notImpl ()
 
     member x.MySaveChanges () =
         AbstractApplicationDbContext.MySaveChanges (x)    
- 
-    static member internal MigratorNotImplemented() =
-        raise <| System.NotSupportedException("Migration is not supported by this type, please implement GetMigrator.")
-
     static member MySaveChanges (context: DbContext) =
       async {
         let saved = ref false

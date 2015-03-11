@@ -27,8 +27,17 @@ type AbstractApplicationIdentityDbContext<'TUser when 'TUser :> IdentityUser >(n
     interface IUpgradeDatabaseProvider with
       member x.GetMigrator() = x.GetMigrator()
       
-    abstract GetMigrator : unit -> DbMigrator 
-    default x.GetMigrator () =
-        AbstractApplicationDbContext.MigratorNotImplemented()
+      member x.DoUpgrade () = x.DoUpgrade()
+      member x.FixScript s = x.FixScript s
+      
+    abstract FixScript : string -> string
+    default x.FixScript s = s
+
+    abstract GetMigrator : unit -> DbMigrator
+    default x.GetMigrator () = DatabaseUpgrade.notImpl ()
+
+    abstract DoUpgrade : unit -> unit 
+    default x.DoUpgrade() = DatabaseUpgrade.notImpl ()
+
     member x.MySaveChanges () =
         AbstractApplicationDbContext.MySaveChanges (x)    
