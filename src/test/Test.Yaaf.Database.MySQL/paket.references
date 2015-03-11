@@ -2,6 +2,9 @@ EntityFramework
 Microsoft.AspNet.Identity.Core
 Microsoft.AspNet.Identity.EntityFramework
 
+MySql.Data
+MySQL.Data.Entities
+
 FSharp.Core
 Yaaf.FSharp.Helper
 

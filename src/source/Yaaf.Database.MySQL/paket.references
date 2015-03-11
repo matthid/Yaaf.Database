@@ -1,11 +1,9 @@
+FSharp.Core
+Yaaf.FSharp.Helper
+
 EntityFramework
 Microsoft.AspNet.Identity.Core
 Microsoft.AspNet.Identity.EntityFramework
 
-FSharp.Core
-Yaaf.FSharp.Helper
-
-Unquote
-Foq
-FsUnit
-NUnit
+MySql.Data
+MySQL.Data.Entities

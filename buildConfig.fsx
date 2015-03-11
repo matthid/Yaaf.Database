@@ -53,7 +53,23 @@ let buildConfig =
                   "Microsoft.AspNet.Identity.Core"
                   "Microsoft.AspNet.Identity.EntityFramework"
                   "FSharp.Core" ]
-                  |> List.map (fun name -> name, (GetPackageVersion "packages" name)) }) ]
+                  |> List.map (fun name -> name, (GetPackageVersion "packages" name)) })
+        "Yaaf.Database.MySQL.nuspec", (fun config p ->
+          { p with
+              Version = config.Version
+              ReleaseNotes = toLines release.Notes
+              Project = "Yaaf.Database.MySQL"
+              Summary = "MySQL helpers in addition to Yaaf.Database."
+              Description = "MySQL helpers in addition to Yaaf.Database."
+              Dependencies = 
+                [ "EntityFramework"
+                  "Microsoft.AspNet.Identity.Core"
+                  "Microsoft.AspNet.Identity.EntityFramework"
+                  "MySql.Data"
+                  "MySQL.Data.Entities"
+                  "FSharp.Core" ]
+                  |> List.map (fun name -> name, (GetPackageVersion "packages" name))
+                  |> List.append [ config.ProjectName, config.Version ] }) ]
     UseNuget = false
     SetAssemblyFileVersions = (fun config ->
       let info =
@@ -64,19 +80,30 @@ let buildConfig =
           Attribute.FileVersion config.Version
           Attribute.InformationalVersion config.Version]
       CreateFSharpAssemblyInfo "./src/SolutionInfo.fs" info
-      CreateCSharpAssemblyInfo "./src/SolutionInfo.cs" info
+      //CreateCSharpAssemblyInfo "./src/SolutionInfo.cs" info
       )
     EnableProjectFileCreation = false
-    //GeneratedFileList =
-    //    [ "DnDns.dll"
-    //      "Mono.System.Xml.dll"
-    //      "Yaaf.Xml.dll"; "Yaaf.Xml.xml"
-    //      "Yaaf.Xmpp.Runtime.Core.dll"; "Yaaf.Xmpp.Runtime.Core.xml"
-    //      "Yaaf.Xmpp.Runtime.dll"; "Yaaf.Xmpp.Runtime.xml"; "Yaaf.Xmpp.Runtime.config" ]
+    GeneratedFileList =
+      [ "Yaaf.Database.dll"; "Yaaf.Database.xml"
+        "Yaaf.Database.MySQL.dll"; "Yaaf.Database.MySQL.xml" ]
     BuildTargets =
      [ { BuildParams.WithSolution with
           // The default build
           PlatformName = "Net45"
+          AfterBuild = fun _ ->
+            if isMono then
+              // Fix MySql.Data.Entities
+              File.Copy("build/test/net45/mysql.data.entity.EF6.dll", "build/test/net45/MySql.Data.Entity.EF6.dll", true)
+              File.Copy("build/net45/mysql.data.entity.EF6.dll", "build/net45/MySql.Data.Entity.EF6.dll", true)
+              // Delete Mono.Security.dll (use the gac version to prevent protocol errors)
+              File.Delete "build/net45/Mono.Security.dll"
+              File.Delete "build/test/net45/Mono.Security.dll"
+          FindUnitTestDlls = fun (folder, config) -> 
+            seq {
+              if not isMono then
+                yield folder @@ "Test.Yaaf.Database.dll" 
+              yield folder @@ "Test.Yaaf.Database.MySQL.dll"
+             } |> Seq.map Path.GetFullPath
           SimpleBuildName = "net45" }
        (*{ BuildParams.WithSolution with
           // The default build

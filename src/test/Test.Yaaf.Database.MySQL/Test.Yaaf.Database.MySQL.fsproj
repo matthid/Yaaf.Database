@@ -1,20 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">Net45</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>dd82cec5-4d0f-4a40-a54e-6fdcd79dcbdd</ProjectGuid>
+    <ProjectGuid>910b3e5c-6bd7-468b-be77-617b2f8292f8</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Test.Yaaf.Database</RootNamespace>
-    <AssemblyName>Test.Yaaf.Database</AssemblyName>
+    <RootNamespace>Test.Yaaf.Database.MySQL</RootNamespace>
+    <AssemblyName>Test.Yaaf.Database.MySQL</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFSharpCoreVersion>4.3.1.0</TargetFSharpCoreVersion>
-    <Name>Test.Yaaf.Database</Name>
-    <TargetFrameworkProfile />
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <Name>Test.Yaaf.Database.MySQL</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|Net45' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,25 +44,31 @@
   </Target>
   -->
   <ItemGroup>
-    <Compile Include="..\..\SolutionInfo.fs">
-      <Link>SolutionInfo.fs</Link>
-    </Compile>
+    <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Test.fs" />
-    <None Include="app.config" />
+    <None Include="Script.fsx" />
     <None Include="paket.references" />
+    <Content Include="app.config" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq" />
-  </ItemGroup>
-  <ItemGroup>
+    <Reference Include="System.Numerics" />
+    <ProjectReference Include="..\..\source\Yaaf.Database.MySQL\Yaaf.Database.MySQL.fsproj">
+      <Name>Yaaf.Database.MySQL</Name>
+      <Project>{b481a01e-7d89-487e-9be8-5d4eb056562a}</Project>
+      <Private>True</Private>
+    </ProjectReference>
     <ProjectReference Include="..\..\source\Yaaf.Database\Yaaf.Database.fsproj">
       <Name>Yaaf.Database</Name>
       <Project>{2c40d68f-e104-461c-8ed4-2ce30bf2dfdb}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Test.Yaaf.Database\Test.Yaaf.Database.fsproj">
+      <Name>Test.Yaaf.Database</Name>
+      <Project>{dd82cec5-4d0f-4a40-a54e-6fdcd79dcbdd}</Project>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
@@ -254,6 +258,64 @@
       <ItemGroup>
         <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
           <HintPath>..\..\..\packages\Microsoft.AspNet.Identity.EntityFramework\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETCore'">
+      <ItemGroup>
+        <Reference Include="MySql.Data.RT">
+          <HintPath>..\..\..\packages\MySql.Data\lib\netcore45\MySql.Data.RT.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v2.0' Or $(TargetFrameworkVersion) == 'v3.0' Or $(TargetFrameworkVersion) == 'v3.5')">
+      <ItemGroup>
+        <Reference Include="MySql.Data">
+          <HintPath>..\..\..\packages\MySql.Data\lib\net20\MySql.Data.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0')">
+      <ItemGroup>
+        <Reference Include="MySql.Data">
+          <HintPath>..\..\..\packages\MySql.Data\lib\net40\MySql.Data.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch')">
+      <ItemGroup>
+        <Reference Include="MySql.Data">
+          <HintPath>..\..\..\packages\MySql.Data\lib\net45\MySql.Data.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0')">
+      <ItemGroup>
+        <Reference Include="mysql.data.entity.EF6">
+          <HintPath>..\..\..\packages\MySQL.Data.Entities\lib\net40\mysql.data.entity.EF6.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch')">
+      <ItemGroup>
+        <Reference Include="mysql.data.entity.EF6">
+          <HintPath>..\..\..\packages\MySQL.Data.Entities\lib\net45\mysql.data.entity.EF6.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
