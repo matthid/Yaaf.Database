@@ -39,7 +39,7 @@ type IUpgradeDatabaseProvider =
     abstract GetMigrator : unit -> DbMigrator
     abstract FixScript : string -> string
 
-[<System.Runtime.CompilerServices.Extension>]
+//[<System.Runtime.CompilerServices.Extension>]
 module DatabaseUpgrade =
   let internal notImpl () =
         (raise <| System.NotSupportedException("Migration is not supported by this type, please implement GetMigrator."))
@@ -50,8 +50,7 @@ module DatabaseUpgrade =
       "from information_schema.columns where", 
       "FROM information_schema.columns WHERE table_schema = SCHEMA() AND")
  
-
-  [<System.Runtime.CompilerServices.Extension>]
+  //[<System.Runtime.CompilerServices.Extension>]
   let Upgrade (provider:IUpgradeDatabaseProvider) =
     let migrator =
       try provider.GetMigrator()
