@@ -37,16 +37,22 @@ type DatabaseUpgradeException =
 
 type IUpgradeDatabaseProvider =
     abstract GetMigrator : unit -> DbMigrator
-    abstract DoUpgrade : unit -> unit
     abstract FixScript : string -> string
 
+[<System.Runtime.CompilerServices.Extension>]
 module DatabaseUpgrade =
   let internal notImpl () =
         (raise <| System.NotSupportedException("Migration is not supported by this type, please implement GetMigrator."))
         : 'a
-  
-  
-  let upgrade (provider:IUpgradeDatabaseProvider) =
+  let FixScript_MSSQL (script:string) = script
+  let FixScript_MySQL (script:string) =
+    script.Replace(
+      "from information_schema.columns where", 
+      "FROM information_schema.columns WHERE table_schema = SCHEMA() AND")
+ 
+
+  [<System.Runtime.CompilerServices.Extension>]
+  let Upgrade (provider:IUpgradeDatabaseProvider) =
     let migrator =
       try provider.GetMigrator()
       with e -> raise <| new DatabaseUpgradeException(sprintf "Failed to ugprade database: %s" e.Message, e)
@@ -62,6 +68,12 @@ module DatabaseUpgrade =
         f.ScriptGenerationException <- scriptErr
       raise f
 
+[<AutoOpen>]
+module UpgradeDatabaseProviderExtensions =
+  type IUpgradeDatabaseProvider with
+    member x.Upgrade() =
+     DatabaseUpgrade.Upgrade x 
+
 [<AbstractClass>]
 type AbstractApplicationDbContext(nameOrConnectionString) =
     inherit DbContext(nameOrConnectionString : string)
@@ -72,8 +84,6 @@ type AbstractApplicationDbContext(nameOrConnectionString) =
                 System.AppDomain.CurrentDomain.BaseDirectory)
     interface IUpgradeDatabaseProvider with
       member x.GetMigrator() = x.GetMigrator()
-      member x.DoUpgrade () = 
-        try x.DoUpgrade() with e -> raise <| DatabaseUpgradeException(e.Message, e)
       member x.FixScript s = x.FixScript s
       
     abstract FixScript : string -> string
@@ -81,9 +91,6 @@ type AbstractApplicationDbContext(nameOrConnectionString) =
     
     abstract GetMigrator : unit -> DbMigrator
     default x.GetMigrator () = DatabaseUpgrade.notImpl ()
-
-    abstract DoUpgrade : unit -> unit 
-    default x.DoUpgrade() = DatabaseUpgrade.notImpl ()
 
     member x.MySaveChanges () =
         AbstractApplicationDbContext.MySaveChanges (x)    
