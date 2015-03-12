@@ -50,7 +50,6 @@ module DatabaseUpgrade =
       "from information_schema.columns where", 
       "FROM information_schema.columns WHERE table_schema = SCHEMA() AND")
  
-
   [<System.Runtime.CompilerServices.Extension>]
   let Upgrade (provider:IUpgradeDatabaseProvider) =
     let migrator =
