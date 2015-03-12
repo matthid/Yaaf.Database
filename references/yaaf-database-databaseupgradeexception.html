@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>AbstractApplicationDbContext - Yaaf.Database</title>
+    <title>DatabaseUpgradeException - Yaaf.Database</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="Matthias Dittrich">
@@ -38,12 +38,60 @@
 
 
 
-<h1>AbstractApplicationDbContext </h1>
+<h1>DatabaseUpgradeException </h1>
 <div class="xmldoc">
     Defined in Yaaf.Database.dll.
 </div>
 <div class="xmldoc">
-</div>
+
+ This error indicates that the sending pipeline was already closed, so sending is not longer possible (IE the closing element </stream> was already sent!)
+</br></div>
+  <h3>Record Fields</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Record Field</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '14', 14)" onmouseover="showTip(event, '14', 14)">
+            scriptErr
+          </code>
+          <div class="tip" id="14">
+            <strong>Signature:</strong> exn<br />
+              <strong>Modifiers:</strong> mutable<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/matthid//blob/master/src/source/Yaaf.Database/AbstractApplicationDbContext.fs#L25-25" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '15', 15)" onmouseover="showTip(event, '15', 15)">
+            upgradeScript
+          </code>
+          <div class="tip" id="15">
+            <strong>Signature:</strong> string<br />
+              <strong>Modifiers:</strong> mutable<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/matthid//blob/master/src/source/Yaaf.Database/AbstractApplicationDbContext.fs#L26-26" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+    </tbody>
+  </table>
   <h3>Constructors</h3>
   <table class="table table-bordered member-list">
     <thead>
@@ -53,15 +101,51 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '5', 5)" onmouseover="showTip(event, '5', 5)">
-            new(nameOrConnectionString)
+          <code onmouseout="hideTip(event, '16', 16)" onmouseover="showTip(event, '16', 16)">
+            new(info, context)
           </code>
-          <div class="tip" id="5">
-            <strong>Signature:</strong> nameOrConnectionString:string -&gt; AbstractApplicationDbContext<br />
+          <div class="tip" id="16">
+            <strong>Signature:</strong> (info:SerializationInfo * context:StreamingContext) -&gt; DatabaseUpgradeException<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/matthid//blob/master/src/source/Yaaf.Database/AbstractApplicationDbContext.fs#L77-77" class="github-link">
+            <a href="https://github.com/matthid//blob/master/src/source/Yaaf.Database/AbstractApplicationDbContext.fs#L31-31" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '17', 17)" onmouseover="showTip(event, '17', 17)">
+            new(msg, inner)
+          </code>
+          <div class="tip" id="17">
+            <strong>Signature:</strong> (msg:string * inner:Exception) -&gt; DatabaseUpgradeException<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/matthid//blob/master/src/source/Yaaf.Database/AbstractApplicationDbContext.fs#L29-29" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '18', 18)" onmouseover="showTip(event, '18', 18)">
+            new(msg)
+          </code>
+          <div class="tip" id="18">
+            <strong>Signature:</strong> msg:string -&gt; DatabaseUpgradeException<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/matthid//blob/master/src/source/Yaaf.Database/AbstractApplicationDbContext.fs#L27-27" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -79,16 +163,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '6', 6)" onmouseover="showTip(event, '6', 6)">
-            FixScript(arg1)
+          <code onmouseout="hideTip(event, '19', 19)" onmouseover="showTip(event, '19', 19)">
+            ScriptGenerationException()
           </code>
-          <div class="tip" id="6">
-            <strong>Signature:</strong> string -&gt; string<br />
-              <strong>Modifiers:</strong> abstract<br />
+          <div class="tip" id="19">
+            <strong>Signature:</strong> unit -&gt; exn<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/matthid//blob/master/src/source/Yaaf.Database/AbstractApplicationDbContext.fs#L88-88" class="github-link">
+            <a href="https://github.com/matthid//blob/master/src/source/Yaaf.Database/AbstractApplicationDbContext.fs#L34-34" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -98,16 +181,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '7', 7)" onmouseover="showTip(event, '7', 7)">
-            GetMigrator()
+          <code onmouseout="hideTip(event, '20', 20)" onmouseover="showTip(event, '20', 20)">
+            ScriptGenerationException()
           </code>
-          <div class="tip" id="7">
-            <strong>Signature:</strong> unit -&gt; DbMigrator<br />
-              <strong>Modifiers:</strong> abstract<br />
+          <div class="tip" id="20">
+            <strong>Signature:</strong> unit -&gt; unit<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/matthid//blob/master/src/source/Yaaf.Database/AbstractApplicationDbContext.fs#L91-91" class="github-link">
+            <a href="https://github.com/matthid//blob/master/src/source/Yaaf.Database/AbstractApplicationDbContext.fs#L34-34" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -117,41 +199,33 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '8', 8)" onmouseover="showTip(event, '8', 8)">
-            MySaveChanges()
+          <code onmouseout="hideTip(event, '21', 21)" onmouseover="showTip(event, '21', 21)">
+            UpgradeScript()
           </code>
-          <div class="tip" id="8">
-            <strong>Signature:</strong> unit -&gt; Task&lt;unit&gt;<br />
+          <div class="tip" id="21">
+            <strong>Signature:</strong> unit -&gt; string<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/matthid//blob/master/src/source/Yaaf.Database/AbstractApplicationDbContext.fs#L94-94" class="github-link">
+            <a href="https://github.com/matthid//blob/master/src/source/Yaaf.Database/AbstractApplicationDbContext.fs#L35-35" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           
         </td>
       </tr>
-    </tbody>
-  </table>
-  <h3>Static members</h3>
-  <table class="table table-bordered member-list">
-    <thead>
-      <tr><td>Static member</td><td>Description</td></tr>
-    </thead>
-    <tbody>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '9', 9)" onmouseover="showTip(event, '9', 9)">
-            MySaveChanges(context)
+          <code onmouseout="hideTip(event, '22', 22)" onmouseover="showTip(event, '22', 22)">
+            UpgradeScript()
           </code>
-          <div class="tip" id="9">
-            <strong>Signature:</strong> context:DbContext -&gt; Task&lt;unit&gt;<br />
+          <div class="tip" id="22">
+            <strong>Signature:</strong> unit -&gt; unit<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/matthid//blob/master/src/source/Yaaf.Database/AbstractApplicationDbContext.fs#L96-96" class="github-link">
+            <a href="https://github.com/matthid//blob/master/src/source/Yaaf.Database/AbstractApplicationDbContext.fs#L35-35" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
