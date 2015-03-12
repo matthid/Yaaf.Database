@@ -73,9 +73,8 @@ let buildConfig =
               Dependencies = 
                 ["FSharp.Core" ]
                   |> List.map (fun name -> name, (GetPackageVersion "packages" name))
-                  |> List.append efDeps
                   |> List.append mysqlDeps
-                  |> List.append [ config.ProjectName, config.Version ] }) ]
+                  |> List.append [ config.ProjectName, config.Version |> RequireExactly ] }) ]
     UseNuget = false
     SetAssemblyFileVersions = (fun config ->
       let info =

@@ -17,20 +17,15 @@ type MyUser () =
 
   member val Version : int = 0 with get, set
 
-type AbstractTestDbContext (nameOrConnection, ?doInit) as x =
-  inherit AbstractApplicationIdentityDbContext<MyUser>(nameOrConnection, false)
-  let doInit = defaultArg doInit true
-  do if doInit then x.DoInit()
-
+[<AbstractClass>]
+type AbstractTestDbContext (nameOrConnection) =
+  inherit AbstractApplicationIdentityDbContext<MyUser>(nameOrConnection)
 
 type MSSQLTestDbContext () as x =
-  inherit AbstractTestDbContext(MSSQLTestDbContext.ConnectionName, false)
-  do x.DoInit()
-
-  override x.Init() =
+  inherit AbstractTestDbContext(MSSQLTestDbContext.ConnectionName)
+  do
     System.Data.Entity.Database.SetInitializer(new NUnitInitializer<MSSQLTestDbContext>())
-  //  System.Data.Entity.Database.SetInitializer(
-  //    new MigrateDatabaseToLatestVersion<MSSQLTestDbContext, MSSQLConfiguration<MSSQLTestDbContext>>())
+    x.Database.Initialize(false)
  
   static member ConnectionName
     with get () =  

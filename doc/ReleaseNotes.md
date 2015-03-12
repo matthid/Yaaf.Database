@@ -1,4 +1,9 @@
-﻿### 0.0.4
+﻿### 0.0.5
+
+ * Added Upgrade API.
+ * Remove Automatic Migrations (cannot be done in a sane way, now the application should just call the new Upgrade API)
+
+### 0.0.4
 
  * Pin versions && disable automatic migrations.
 
