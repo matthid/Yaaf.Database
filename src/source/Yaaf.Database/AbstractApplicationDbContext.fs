@@ -39,6 +39,7 @@ type IUpgradeDatabaseProvider =
     abstract GetMigrator : unit -> DbMigrator
     abstract FixScript : string -> string
 
+/// [omit]
 [<System.Runtime.CompilerServices.Extension>]
 module DatabaseUpgrade =
   let internal notImpl () =
